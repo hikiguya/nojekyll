@@ -19,7 +19,7 @@
         .card { 
             background-color: rgb(255, 255, 240);
             padding: 30px; 
-            width: 320px; 
+            width: 65%; 
             border-radius: 15px;
             box-shadow: 10px 10px 30px #ffffff80; 
             transition: transform 0.3s ease;
@@ -77,11 +77,11 @@
 
     var index = 0;
     var score = 0;
-    var timeLeft = 1000;
+    var timeLeft = 10;
     var timer; 
 
     function startTimer() {
-        timeLeft = 1000;
+        timeLeft = 10;
         document.getElementById("timer").innerText = timeLeft;
         
         clearInterval(timer); 
@@ -128,7 +128,7 @@
         document.getElementById("scr").innerText = score;
         
         index++;
-        setTimeout(show, 1500); 
+        setTimeout(show, 2000); 
     }
 
     function showFinalResult() {
