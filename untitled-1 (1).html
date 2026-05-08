@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لعبة أسئلة بسيطة</title>
+    <style>
+        body { font-family: sans-serif; text-align: center;  background: radial-gradient(#461c02, #281001); }
+        .card { background:radial-gradient( white,rgba(240, 183, 121, 0.89),rgba(177, 133, 85, 0.89) );
+            
+            padding: 20px; 
+            margin: 50px auto;
+             width: 300px; 
+             border-radius: 10px;
+         
+             box-shadow:  0 0 10px rgba(0,0,0,0.1); }
+        button { display: block; 
+            width: 100%; margin: 10px 0;
+             padding: 10px; 
+             cursor: pointer;
+            background:radial-gradient(rgb(8, 8, 205), #06044c);
+        color: #ffffff; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 id="ques">السؤال يظهر هنا</h2>
+    <!-- أزرار ثابتة نغير نصوصها فقط -->
+    <button onclick="check(0)" id="btn0">اختيار 1</button>
+    <button onclick="check(1)" id="btn1">اختيار 2</button>
+    <button onclick="check(2)" id="btn2">اختيار 3</button>
+    
+    <p id="res"></p>
+    <p>النقاط: <span id="scr">0</span></p>
+    <p>الوقت المتبقي: <span id="timer" style="color: rgb(255, 238, 48); font-weight: bold;">10</span> ثانية</p>
+</div>
+<script>
+    var questions = ["ما هو لون السماء؟", "ما هو عاصمة المغرب؟", "1 + 1 = ?"];
+    var choices = [
+        ["أحمر", "أزرق", "أخضر"],
+        ["الرباط", "باريس", "لندن"],
+        ["5", "3", "2"]
+    ];
+    var answers = ["أزرق", "الرباط", "2"];
+
+    var index = 0;
+    var score = 0;
+    var timeLeft = 1000; // الوقت المسموح لكل سؤال
+    var timer; // متغير لتخزين الـ Interval
+
+    function startTimer() {
+        timeLeft = 1000; // إعادة تعيين الوقت لـ 10 ثوانٍ
+        document.getElementById("timer").innerText = timeLeft;
+        
+        // تنظيف أي عداد سابق لضمان عدم تداخل الأوقات
+        clearInterval(timer); 
+
+        timer = setInterval(function() {
+            timeLeft--;
+            document.getElementById("timer").innerText = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                check(-1); // إذا انتهى الوقت، نعتبرها إجابة خاطئة (نرسل -1)
+            }
+        }, 1000);
+        
+    }
+
+    function show() {
+        if (index < questions.length) {
+            document.getElementById("ques").innerText = questions[index];
+            document.getElementById("btn0").innerText = choices[index][0];
+            document.getElementById("btn1").innerText = choices[index][1];
+            document.getElementById("btn2").innerText = choices[index][2];
+            document.getElementById("res").innerText = ""; // تنظيف الرسالة
+            
+            startTimer(); // ابدأ العداد مع كل سؤال جديد
+        } else {
+            clearInterval(timer); // إيقاف العداد نهائياً عند انتهاء الأسئلة
+            showFinalResult();
+        }
+    }
+
+    function check(btnNumber) {
+        clearInterval(timer); // إيقاف العداد فور الضغط على أي زر
+
+        var correctChoice = answers[index];
+        var userChoice = (btnNumber === -1) ? "انتهى الوقت" : choices[index][btnNumber];
+
+        if (userChoice === correctChoice) {
+            score++;
+            document.getElementById("res").innerText = "صح! ✅";
+        } else {
+            document.getElementById("res").innerText = (btnNumber === -1) ? "انتهى الوقت! ⏰" : "خطأ! ❌";
+        }
+
+        document.getElementById("scr").innerText = score;
+        
+        index++;
+        setTimeout(show, 1500); // ننتظر قليلاً قبل السؤال التالي
+    }
+
+    function showFinalResult() {
+        document.body.innerHTML = `
+            <div style="text-align:center; padding:50px;">
+                <h1>انتهت اللعبة! 🏁</h1>
+                <p>نقاطك النهائية هي: ${score} من ${questions.length}</p>
+                <button onclick="location.reload()" style="background-color:darkblue;color:white; width:300px;
+                 border-radius:30px;  margin:auto;">إعادة اللعب</button>
+            </div>
+        `;
+    }
+
+    show(); 
+</script>
+</body>
+</html>
