@@ -5,21 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>لعبة أسئلة بسيطة</title>
     <style>
-        body { font-family: sans-serif; text-align: center;  background: radial-gradient(#461c02, #281001); }
-        .card { background:radial-gradient( white,rgba(240, 183, 121, 0.89),rgba(177, 133, 85, 0.89) );
-            
-            padding: 20px; 
-            margin: 50px auto;
-             width: 300px; 
-             border-radius: 10px;
-         
-             box-shadow:  0 0 10px rgba(0,0,0,0.1); }
-        button { display: block; 
-            width: 100%; margin: 10px 0;
-             padding: 10px; 
-             cursor: pointer;
-            background:radial-gradient(rgb(8, 8, 205), #06044c);
-        color: #ffffff; }
+       body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center;  
+            background: radial-gradient(circle, rgb(90, 20, 20), rgb(50, 10, 10));
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card { 
+            background-color: rgb(255, 255, 240);
+            padding: 30px; 
+            width: 320px; 
+            border-radius: 15px;
+            box-shadow: 10px 10px 30px #ffffff80; 
+            transition: transform 0.3s ease;
+        }
+
+       
+
+        h2 { color: #444; margin-bottom: 20px; }
+
+        button { 
+            display: block; 
+            width: 100%; 
+            margin: 15px 0;
+            padding: 12px; 
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            background: radial-gradient(circle, #c0c0c0, #808080);
+            color: #ffffff; 
+            transition: filter 0.2s, scale 0.1s;
+        }
+
+        button:hover {
+            filter: brightness(1.1);
+        }
+
+        button:active {
+            scale: 0.98;
+        }
     </style>
 </head>
 <body>
@@ -33,7 +64,7 @@
     
     <p id="res"></p>
     <p>النقاط: <span id="scr">0</span></p>
-    <p>الوقت المتبقي: <span id="timer" style="color: rgb(255, 238, 48); font-weight: bold;">10</span> ثانية</p>
+    <p>الوقت المتبقي: <span id="timer" style="color: rgb(100, 20, 20); font-weight: bold;">10</span> ثانية</p>
 </div>
 <script>
     var questions = ["ما هو لون السماء؟", "ما هو عاصمة المغرب؟", "1 + 1 = ?"];
@@ -46,14 +77,13 @@
 
     var index = 0;
     var score = 0;
-    var timeLeft = 10; // الوقت المسموح لكل سؤال
-    var timer; // متغير لتخزين الـ Interval
+    var timeLeft = 1000;
+    var timer; 
 
     function startTimer() {
-        timeLeft = 10; // إعادة تعيين الوقت لـ 10 ثوانٍ
+        timeLeft = 1000;
         document.getElementById("timer").innerText = timeLeft;
         
-        // تنظيف أي عداد سابق لضمان عدم تداخل الأوقات
         clearInterval(timer); 
 
         timer = setInterval(function() {
@@ -62,7 +92,7 @@
 
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                check(-1); // إذا انتهى الوقت، نعتبرها إجابة خاطئة (نرسل -1)
+                check(-1); 
             }
         }, 1000);
         
@@ -74,18 +104,17 @@
             document.getElementById("btn0").innerText = choices[index][0];
             document.getElementById("btn1").innerText = choices[index][1];
             document.getElementById("btn2").innerText = choices[index][2];
-            document.getElementById("res").innerText = ""; // تنظيف الرسالة
+            document.getElementById("res").innerText = ""; 
             
-            startTimer(); // ابدأ العداد مع كل سؤال جديد
+            startTimer(); 
         } else {
-            clearInterval(timer); // إيقاف العداد نهائياً عند انتهاء الأسئلة
+            clearInterval(timer);
             showFinalResult();
         }
     }
 
     function check(btnNumber) {
-        clearInterval(timer); // إيقاف العداد فور الضغط على أي زر
-
+        clearInterval(timer); 
         var correctChoice = answers[index];
         var userChoice = (btnNumber === -1) ? "انتهى الوقت" : choices[index][btnNumber];
 
@@ -99,21 +128,31 @@
         document.getElementById("scr").innerText = score;
         
         index++;
-        setTimeout(show, 1500); // ننتظر قليلاً قبل السؤال التالي
+        setTimeout(show, 1500); 
     }
 
     function showFinalResult() {
+        var status = (score >= 2) ? "Smart 🧠" : "Stupid 🤡";
+        var statusColor = (score >= 2) ? "#4CAF50" : "#ff4444";
         document.body.innerHTML = `
             <div style="text-align:center; padding:50px;">
-                <h1>انتهت اللعبة! 🏁</h1>
-                <p>نقاطك النهائية هي: ${score} من ${questions.length}</p>
-                <button onclick="location.reload()" style="background-color:darkblue;color:white; width:60%px;
+                <h1 style="color:white">انتهت اللعبة! 🏁</h1>
+                <div style="color:${statusColor}; font-size: 40px; font-weight: bold; margin: 20px;">
+                    ${status}
+                </div>
+                <p style="color:white">نقاطك النهائية هي: ${score} من ${questions.length}</p>
+                <button onclick="location.reload()" style="background-color:darkblue;color:white; width:300px;
                  border-radius:30px;  margin:auto;">إعادة اللعب</button>
             </div>
         `;
     }
-
+    
     show(); 
 </script>
 </body>
 </html>
+  
+ 
+          
+    
+    
