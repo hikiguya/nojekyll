@@ -46,11 +46,11 @@
 
     var index = 0;
     var score = 0;
-    var timeLeft = 1000; // الوقت المسموح لكل سؤال
+    var timeLeft = 10; // الوقت المسموح لكل سؤال
     var timer; // متغير لتخزين الـ Interval
 
     function startTimer() {
-        timeLeft = 1000; // إعادة تعيين الوقت لـ 10 ثوانٍ
+        timeLeft = 10; // إعادة تعيين الوقت لـ 10 ثوانٍ
         document.getElementById("timer").innerText = timeLeft;
         
         // تنظيف أي عداد سابق لضمان عدم تداخل الأوقات
@@ -107,7 +107,7 @@
             <div style="text-align:center; padding:50px;">
                 <h1>انتهت اللعبة! 🏁</h1>
                 <p>نقاطك النهائية هي: ${score} من ${questions.length}</p>
-                <button onclick="location.reload()" style="background-color:darkblue;color:white; width:300px;
+                <button onclick="location.reload()" style="background-color:darkblue;color:white; width:60%px;
                  border-radius:30px;  margin:auto;">إعادة اللعب</button>
             </div>
         `;
