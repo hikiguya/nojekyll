@@ -160,7 +160,7 @@
         .search-item:hover { background: #3d3d6b; transform: translateX(-5px); }
         .no-results { color: #ee5253; font-style: italic; margin-top: 15px; display: none; }
 
-        /* تمرين 4: لعبة الذاكرة */
+        /* تمرين 4: لعبة الذاكرة (معدلة ومتوافقة 100% مع الآيفون وسفاري) */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(4, minmax(60px, 75px)); 
@@ -175,17 +175,31 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 24px; 
+            font-size: 0px; /* تم تعديله إلى 0 لإخفاء الإيموجي تماماً في الآيفون بدلاً من الشفافية */
             font-weight: bold; 
-            color: transparent; 
             cursor: pointer; 
             user-select: none; 
-            transition: background-color 0.3s, transform 0.2s; 
+            transition: background-color 0.3s, transform 0.2s, font-size 0.2s; 
             -webkit-tap-highlight-color: transparent;
         }
         .card:hover { transform: scale(1.03); background-color: #48487f; }
-        .card.flipped { background-color: #0abde3; color: white; cursor: default; }
-        .card.matched { background-color: #10ac84; color: white; cursor: default; animation: pulse 0.3s; }
+        
+        /* عند قلب الكرت */
+        .card.flipped { 
+            background-color: #0abde3; 
+            font-size: 24px; /* يظهر الإيموجي هنا بحجمه الطبيعي */
+            color: white; 
+            cursor: default; 
+        }
+        
+        /* عند تطابق الكروت */
+        .card.matched { 
+            background-color: #10ac84; 
+            font-size: 24px; /* يبقى الإيموجي ظاهراً */
+            color: white; 
+            cursor: default; 
+            animation: pulse 0.3s; 
+        }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
         /* تصميم كرت المسابقة الفرعي المتناسق */
@@ -254,8 +268,8 @@
                 margin-bottom: 15px;
             }
 
-            /* تعديل حجم الخط بالرموز للعبة الذاكرة في الهاتف لكي لا تخرج */
-            .card {
+            /* حجم خط الأيموجي داخل الهواتف الذكية عند فتح الكرت */
+            .card.flipped, .card.matched {
                 font-size: 20px;
             }
         }
@@ -507,12 +521,8 @@
     displayGames(games);
 
     // ==========================================
-    // كود التمرين الرابع: لعبة الذاكرة (Memory Game)
+    // كود التمرين الرابع: لعبة الذاكرة (Memory Game) - مصلحة ومتوافقة 100% مع iOS
     // ==========================================
-   // ==========================================
-    // كود التمرين الرابع: لعبة الذاكرة (Memory Game) - نسخة مصلحة للآيفون 📱
-    // ==========================================
-    // تم اختيار إيموجيات حديثة مدعومة بالكامل وبشكل نقي في نظام Apple iOS
     const cardValues = [
         "🎯", "🎯", "🤡", "🤡", "👻", "👻", "🌟", "🌟", 
         "🤖", "🤖", "🦊", "🦊", "🎉", "🎉", "🔥", "🔥"
@@ -523,7 +533,7 @@
     let firstCard = null, secondCard = null, lockBoard = false;
 
     function createBoard() {
-        gameGrid.innerHTML = ""; // تنظيف الشبكة تماماً قبل بناء اللعبة لضمان عملها بشكل سليم
+        gameGrid.innerHTML = ""; 
         cardValues.forEach(function(value) {
             const card = document.createElement('div');
             card.classList.add('card');
@@ -577,10 +587,10 @@
     var questions = [
         "ما هي عاصمة الإمبراطورية البيزنطية القديمة؟",
         "ما هو العنصر الكيميائي الأكثر وفرة في القشرة الأرضية؟",
-        "من هو الفيلسوف اليوناني الذي كان تلميذاً لأفلاطون ومعلماً للإسكندر الأكبر؟",
+        "من هو الفيلسوف اليوناني الذي كان تلميذاً لأفلاطون ومعلماً للإسكندر الأكبر？",
         "ما هي الدولة الأفريقية الوحيدة التي لم تستعمر قط في تاريخها؟",
         "كم عدد الغرف (الأذينات والبطينات) في قلب العقرب؟",
-        "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس？",
+        "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس؟",
         "ما هو الكوكب الأقرب إلى الشمس من حيث الحجم (توأم الأرض)؟",
         "ما هو البحر المغلق الذي لا يملك أي منافذ على المحيطات؟",
         "من هو العالم الذي اكتشف الدورة الدموية الكبرى؟",
