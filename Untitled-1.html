@@ -25,18 +25,15 @@
             flex-direction: column;
             padding: 20px;
             box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-            z-index: 10;
-            flex-shrink: 0;
         }
 
         .sidebar h1 {
             font-size: 20px;
             text-align: center;
             margin-bottom: 30px;
-            color: #00d2d3;
+            color: #00d2d2;
             border-bottom: 2px solid #282846;
             padding-bottom: 15px;
-            margin-top: 0;
         }
 
         .tab-btn {
@@ -54,8 +51,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         .tab-btn:hover {
@@ -104,13 +99,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-align: center;
             border: 1px solid #3d3d6b;
-            width: 100%;
-            box-sizing: border-box;
+            margin-bottom: 20px;
         }
         .app-card h2 { margin-top: 0; margin-bottom: 20px; color: #fff; }
         .app-card label { display: block; text-align: right; margin-top: 10px; font-size: 14px; color: #b5b5b5; }
         
-        /* عناصر الإدخال المشتركة */
         .app-card input[type="text"], 
         .app-card input[type="number"], 
         .app-card select { 
@@ -118,18 +111,40 @@
         }
         .app-card input:focus { border-color: #ff9f43; }
 
+        /* أزرار اختيار الألعاب الفرعية بالداخل */
+        .game-switcher-panel {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .sub-game-btn {
+            background-color: #3d3d6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .sub-game-btn.active {
+            background-color: #0abde3;
+            box-shadow: 0 0 10px rgba(10, 189, 227, 0.5);
+        }
+
         /* تمرين 1: قائمة المهام */
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
         .input-group input { margin: 0; }
-        .add-btn { background-color: #0abde3; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; flex-shrink: 0; }
+        .add-btn { background-color: #0abde3; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
         .add-btn:hover { background-color: #00a8ff; }
         .todo-list { list-style: none; padding: 0; margin: 0; text-align: right; }
-        .todo-item { background: #1e1e38; padding: 12px; margin-bottom: 8px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-right: 4px solid #0abde3; font-size: 16px; gap: 10px; }
-        .delete-btn { background-color: #ee5253; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; flex-shrink: 0; }
+        .todo-item { background: #1e1e38; padding: 12px; margin-bottom: 8px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-right: 4px solid #0abde3; font-size: 16px; }
+        .delete-btn { background-color: #ee5253; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
         .delete-btn:hover { background-color: #ff6b6b; }
 
         /* تمرين 2: محول العملات */
-        .result-box { margin-top: 25px; padding: 15px; background: #1e1e38; border-radius: 8px; font-size: 20px; font-weight: bold; border-right: 5px solid #ff9f43; min-height: 30px; word-break: break-all; }
+        .result-box { margin-top: 25px; padding: 15px; background: #1e1e38; border-radius: 8px; font-size: 20px; font-weight: bold; border-right: 5px solid #ff9f43; min-height: 30px; }
         .loading { font-size: 14px; color: #a2a2d0; }
 
         /* تمرين 3: محرك البحث */
@@ -139,77 +154,21 @@
         .no-results { color: #ee5253; font-style: italic; margin-top: 15px; display: none; }
 
         /* تمرين 4: لعبة الذاكرة */
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; justify-content: center; margin-top: 20px; max-width: 340px; margin-left: auto; margin-right: auto; }
-        
-        /* الكارت مغلق: التعديل هنا ليدعم الآيفون بأمان */
-        .card { 
-            aspect-ratio: 1 / 1; 
-            background-color: #3d3d6b; 
-            border-radius: 8px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: bold; 
-            cursor: pointer; 
-            user-select: none; 
-            transition: background-color 0.3s, transform 0.2s, font-size 0.2s; 
-            font-size: 0px; /* إخفاء الإيموجي عن طريق حجم الخط بدلاً من الشفافية */
-        }
+        .grid { display: grid; grid-template-columns: repeat(4, 75px); gap: 12px; justify-content: center; margin-top: 20px; }
+        .card { width: 75px; height: 75px; background-color: #3d3d6b; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: transparent; cursor: pointer; user-select: none; transition: background-color 0.3s, transform 0.2s; }
         .card:hover { transform: scale(1.05); background-color: #48487f; }
-        
-        /* الكارت عند الانقلاب أو التطابق: يظهر الإيموجي بحجمه الكامل */
-        .card.flipped { background-color: #0abde3; font-size: 26px; cursor: default; }
-        .card.matched { background-color: #10ac84; font-size: 26px; cursor: default; animation: pulse 0.3s; }
-        
+        .card.flipped { background-color: #0abde3; color: white; cursor: default; }
+        .card.matched { background-color: #10ac84; color: white; cursor: default; animation: pulse 0.3s; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        /* ========================================== */
-        /* التجاوب السحري مع الهواتف الذكية الأقل من 768px */
-        /* ========================================== */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-                overflow: auto;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                padding: 15px;
-                flex-direction: row;
-                overflow-x: auto;
-                gap: 10px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-                white-space: nowrap;
-            }
-
-            .sidebar h1 {
-                display: none;
-            }
-
-            .tab-btn {
-                width: auto;
-                margin-bottom: 0;
-                padding: 10px 15px;
-                font-size: 14px;
-                display: inline-flex;
-            }
-
-            .content-area {
-                padding: 20px 15px;
-                height: calc(100vh - 75px);
-                align-items: flex-start;
-            }
-
-            .app-card {
-                padding: 20px 15px;
-            }
-
-            /* حجم خط الإيموجي على الهواتف عند الفتح */
-            .card.flipped, .card.matched {
-                font-size: 22px; 
-            }
+        /* تصميم كرت المسابقة */
+        .quiz-container button {
+            display: block; width: 100%; padding: 12px; margin: 10px 0; background-color: #1e1e38; border: 1px solid #3d3d6b; color: white; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; text-align: center;
         }
+        .quiz-container button:hover { background-color: #3d3d6b; border-color: #0abde3; }
+        .info-text { text-align: right; font-size: 14px; margin: 5px 0; color: #b5b5b5; }
+        .highlight-blue { color: #00cec9; font-weight: bold; }
+        .highlight-red { color: #ff7675; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -217,10 +176,10 @@
     <!-- القائمة الجانبية -->
     <div class="sidebar">
         <h1>لوحة تحكم التمارين 🛠️</h1>
-        <button class="tab-btn active" onclick="switchTab(event, 'todo-tab')">📝 قائمة المهام</button>
-        <button class="tab-btn" onclick="switchTab(event, 'converter-tab')">💸 محول العملات</button>
-        <button class="tab-btn" onclick="switchTab(event, 'search-tab')">🔍 محرك البحث اللحظي</button>
-        <button class="tab-btn" onclick="switchTab(event, 'memory-tab')">🧠 لعبة الذاكرة</button>
+        <button class="tab-btn active" onclick="switchTab('todo-tab')">📝 قائمة المهام</button>
+        <button class="tab-btn" onclick="switchTab('converter-tab')">💸 محول العملات</button>
+        <button class="tab-btn" onclick="switchTab('search-tab')">🔍 محرك البحث اللحظي</button>
+        <button class="tab-btn" onclick="switchTab('memory-tab')">🧠 الألعاب التفاعلية</button>
     </div>
 
     <!-- منطقة عرض التطبيقات القابلة للتبديل -->
@@ -267,29 +226,62 @@
             </div>
         </div>
 
-        <!-- التمرين الرابع: لعبة الذاكرة -->
+        <!-- التمرين الرابع: الألعاب الذكية (يحتوي على لُعبتين يتم التبديل بينهما) -->
         <div id="memory-tab" class="tab-content">
-            <div class="app-card" style="border-color: #0abde3;">
+            
+            <!-- لوحة التحكم للتبديل بين اللعبتين بالداخل -->
+            <div class="game-switcher-panel">
+                <button class="sub-game-btn active" onclick="changeGame(event, 'memory-game-card')">🧠 لعبة الذاكرة</button>
+                <button class="sub-game-btn" onclick="changeGame(event, 'quiz-game-card')">❓ مسابقة الأسئلة</button>
+            </div>
+
+            <!-- اللعبة الأولى: لعبة الذاكرة -->
+            <div id="memory-game-card" class="app-card sub-game-content" style="border-color: #0abde3;">
                 <h2 style="color: #0abde3;">لعبة اختبار الذاكرة 🧠</h2>
-                <p style="color: #b5b5b5; margin: 0;">ابحث عن الأشكال المتشابهة!</p>
+                <p style="color: #b5b5b5; margin: 0;">ابحث عن الأرقام المتشابهة!</p>
                 <div class="grid" id="gameGrid"></div>
             </div>
+
+            <!-- اللعبة الثانية: لعبة الأسئلة الثقافية -->
+            <div id="quiz-game-card" class="app-card quiz-container sub-game-content" style="border-color: #0abde3; display: none;">
+                <h2 id="ques" style="color: #0abde3;">السؤال يظهر هنا</h2>
+                <button onclick="check(0)" id="btn0">اختيار 1</button>
+                <button onclick="check(1)" id="btn1">اختيار 2</button>
+                <button onclick="check(2)" id="btn2">اختيار 3</button>
+                
+                <p id="res" style="font-weight: bold; font-size: 18px; margin: 15px 0;"></p>
+                <p class="info-text">النقاط: <span id="scr" class="highlight-blue">0</span></p>
+                <p class="info-text">الوقت المتبقي: <span id="timer" class="highlight-red">10</span> ثوانٍ</p>
+            </div>
+
         </div>
 
     </div>
 
 <script>
     // ==========================================
-    // أولاً: منطق التنقل بين التبويبات (Tabs Logic)
+    // أولاً: منطق التنقل بين التبويبات الرئيسية (Tabs Logic)
     // ==========================================
-    function switchTab(e, tabId) {
+    function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
         document.getElementById(tabId).classList.add('active');
-        if (e && e.currentTarget) {
-            e.currentTarget.classList.add('active');
-        }
+        event.currentTarget.classList.add('active');
+    }
+
+    // ==========================================
+    // منطق التبديل بين الألعاب داخل تبويب الذاكرة
+    // ==========================================
+    function changeGame(event, gameCardId) {
+        // إخفاء كل الكروت الداخلية للألعاب
+        document.querySelectorAll('.sub-game-content').forEach(card => card.style.display = 'none');
+        // إزالة الكلاس الفعال من أزرار الألعاب الداخلية
+        document.querySelectorAll('.sub-game-btn').forEach(btn => btn.classList.remove('active'));
+
+        // إظهار اللعبة المختارة وتنشيط زرها
+        document.getElementById(gameCardId).style.display = 'block';
+        event.currentTarget.classList.add('active');
     }
 
     // ==========================================
@@ -473,6 +465,123 @@
         [firstCard, secondCard, lockBoard] = [null, null, false];
     }
     createBoard();
+
+    // ==========================================
+    // كود لعبة مسابقة الأسئلة الثقافية
+    // ==========================================
+    var questions = [
+        "ما هي عاصمة الإمبراطورية البيزنطية القديمة؟",
+        "ما هو العنصر الكيميائي الأكثر وفرة في القشرة الأرضية؟",
+        "من هو الفيلسوف اليوناني الذي كان تلميذاً لأفلاطون ومعلماً للإسكندر الأكبر؟",
+        "ما هي الدولة الأفريقية الوحيدة التي لم تستعمر قط في تاريخها؟",
+        "كم عدد الغرف في قلب العقرب؟",
+        "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس؟",
+        "ما هو الكوكب الأقرب إلى الشمس من حيث الحجم (توأم الأرض)؟",
+        "ما هو البحر المغلق الذي لا يملك أي منافذ على المحيطات؟",
+        "من هو العالم الذي اكتشف الدورة الدموية الكبرى？",
+        "أين يقع أعمق خندق مائي في العالم (خندق ماريانا)؟"
+    ];
+
+    var choices = [
+        ["روما", "القسطنطينية", "أثينا"],
+        ["الأكسجين", "الحديد", "السيليكون"],
+        ["سقراط", "فيثاغورس", "أرسطو"],
+        ["ليبيريا", "إثيوبيا", "جنوب أفريقيا"],
+        ["غرفتان", "لا يملك قلباً", "12 غرفة"],
+        ["1492م", "1516م", "1258م"],
+        ["المريخ", "الزهرة", "عطارد"],
+        ["بحر قزوين", "البحر الأحمر", "البحر الميت"],
+        ["ابن النفيس", "وليام هارفي", "لويس باستور"],
+        ["المحيط الهندي", "المحيط الأطلسي", "المحيط الهادئ"]
+    ];
+
+    var answers = ["القسطنطينية", "الأكسجين", "أرسطو", "إثيوبيا", "12 غرفة", "1492م", "الزهرة", "بحر قزوين", "وليام هارفي", "المحيط الهادئ"];
+
+    var index = 0;
+    var score = 0;
+    var timeLeft = 10; 
+    var timer; 
+
+    // حفظ التصميم الأصلي لإعادة اللعبة لاحقاً
+    var originalCardHTML = document.getElementById('quiz-game-card').innerHTML;
+
+    function startTimer() {
+        timeLeft = 10; 
+        document.getElementById("timer").innerText = timeLeft;
+        clearInterval(timer); 
+
+        timer = setInterval(function() {
+            timeLeft--;
+            document.getElementById("timer").innerText = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                check(-1); 
+            }
+        }, 1000);
+    }
+
+    function show() {
+        if (index < questions.length) {
+            document.getElementById("ques").innerText = questions[index];
+            document.getElementById("btn0").innerText = choices[index][0];
+            document.getElementById("btn1").innerText = choices[index][1];
+            document.getElementById("btn2").innerText = choices[index][2];
+            document.getElementById("res").innerText = ""; 
+            
+            startTimer(); 
+        } else {
+            clearInterval(timer); 
+            showFinalResult();
+        }
+    }
+
+    function check(btnNumber) {
+        clearInterval(timer); 
+
+        var correctChoice = answers[index];
+        var userChoice = (btnNumber === -1) ? "انتهى الوقت" : choices[index][btnNumber];
+
+        if (userChoice === correctChoice) {
+            score++;
+            document.getElementById("res").style.color = "#00b894";
+            document.getElementById("res").innerText = "إجابة صحيحة! ✅";
+        } else {
+            document.getElementById("res").style.color = "#ff7675";
+            document.getElementById("res").innerText = (btnNumber === -1) ? "انتهى الوقت! ⏰" : "إجابة خاطئة! ❌ (الإجابة: " + correctChoice + ")";
+        }
+
+        document.getElementById("scr").innerText = score;
+        
+        index++;
+        setTimeout(show, 2000); 
+    }
+
+    function showFinalResult() {
+        var status = (score >= 5) ? "Smart 🧠" : "Stupid 🤡";
+        var statusColor = (score >= 5) ? "#00b894" : "#ff7675";
+        
+        document.getElementById('quiz-game-card').innerHTML = `
+            <div style="text-align:center; padding:10px;">
+                <h1 style="color:#ffffff; font-size: 24px; margin-top:0; font-weight:700;">انتهت اللعبة! 🏁</h1>
+                <div style="color:${statusColor}; font-size: 46px; font-weight: bold; margin: 20px 0; text-shadow: 0 0 10px ${statusColor}44;">
+                    ${status}
+                </div>
+                <p style="color:#b3b3cc; font-size: 16px; font-weight: 500;">نقاطك النهائية هي: <span style="font-size:22px; color:#00cec9; font-weight:bold;">${score}</span> من ${questions.length}</p>
+                
+                <button onclick="restartGame()" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); color:white; padding: 14px; border-radius:10px; font-weight:bold; margin-top:25px; border:none; width:100%; cursor:pointer; box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);">إعادة اللعب مباشرة 🔄</button>
+            </div>
+        `;
+    }
+
+    function restartGame() {
+        index = 0;
+        score = 0;
+        document.getElementById('quiz-game-card').innerHTML = originalCardHTML;
+        show();
+    }
+
+    show(); 
 </script>
 
 </body>
