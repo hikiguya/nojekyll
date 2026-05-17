@@ -160,7 +160,7 @@
         .search-item:hover { background: #3d3d6b; transform: translateX(-5px); }
         .no-results { color: #ee5253; font-style: italic; margin-top: 15px; display: none; }
 
-        /* تمرين 4: لعبة الذاكرة (محدثة لتتجاوب مع الهواتف تماماً) */
+        /* تمرين 4: لعبة الذاكرة */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(4, minmax(60px, 75px)); 
@@ -188,11 +188,20 @@
         .card.matched { background-color: #10ac84; color: white; cursor: default; animation: pulse 0.3s; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
-        /* تصميم كرت المسابقة */
-        .quiz-container button {
+        /* تصميم كرت المسابقة الفرعي المتناسق */
+        .sub-game-content .quiz-container button {
             display: block; width: 100%; padding: 14px; margin: 10px 0; background-color: #1e1e38; border: 1px solid #3d3d6b; color: white; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; text-align: center; font-weight: 500; -webkit-tap-highlight-color: transparent;
         }
-        .quiz-container button:hover { background-color: #3d3d6b; border-color: #0abde3; }
+        .sub-game-content .quiz-container button:hover { background-color: #3d3d6b; border-color: #0abde3; }
+        
+        /* إعدادات أزرار اللعبة الثقافية */
+        #gameCard button {
+            display: block; width: 100%; padding: 12px; margin: 10px 0; background: linear-gradient(135deg, #6c5ce7, #a29bfe); border: none; color: white; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.2s; text-align: center; font-weight: bold; -webkit-tap-highlight-color: transparent;
+        }
+        #gameCard button:hover { transform: translateY(-2px); background: linear-gradient(135deg, #5b4cdb, #8f85ff); }
+        #gameCard #startBtn { background: linear-gradient(135deg, #00b894, #00cec9); margin-top: 20px; }
+        
+        .game-play-area { display: none; }
         .info-text { text-align: right; font-size: 14px; margin: 5px 0; color: #b5b5b5; }
         .highlight-blue { color: #00cec9; font-weight: bold; }
         .highlight-red { color: #ff7675; font-weight: bold; }
@@ -254,7 +263,7 @@
 </head>
 <body>
 
-    <!-- القائمة الجانبية (تتحول تلقائياً لشريط علوي في الموبايل) -->
+    <!-- القائمة الجانبية -->
     <div class="sidebar">
         <h1>لوحة تحكم التمارين 🛠️</h1>
         <button class="tab-btn active" onclick="switchTab('todo-tab')">📝 قائمة المهام</button>
@@ -307,7 +316,7 @@
             </div>
         </div>
 
-        <!-- التمرين الرابع: الألعاب الذكية (يحتوي على لُعبتين يتم التبديل بينهما) -->
+        <!-- التمرين الرابع: الألعاب الذكية -->
         <div id="memory-tab" class="tab-content">
             
             <!-- لوحة التحكم للتبديل بين اللعبتين بالداخل -->
@@ -324,15 +333,27 @@
             </div>
 
             <!-- اللعبة الثانية: لعبة الأسئلة الثقافية -->
-            <div id="quiz-game-card" class="app-card quiz-container sub-game-content" style="border-color: #0abde3; display: none;">
-                <h2 id="ques" style="color: #0abde3;">السؤال يظهر هنا</h2>
-                <button onclick="check(0)" id="btn0">اختيار 1</button>
-                <button onclick="check(1)" id="btn1">اختيار 2</button>
-                <button onclick="check(2)" id="btn2">اختيار 3</button>
-                
-                <p id="res" style="font-weight: bold; font-size: 16px; margin: 15px 0;"></p>
-                <p class="info-text">النقاط: <span id="scr" class="highlight-blue">0</span></p>
-                <p class="info-text">الوقت المتبقي: <span id="timer" class="highlight-red">10</span> ثوانٍ</p>
+            <div id="quiz-game-card" class="app-card sub-game-content" style="border-color: #6c5ce7; display: none;">
+                <div id="gameCard">
+                    <!-- شاشة البداية المبدئية -->
+                    <div id="welcomeScreen">
+                        <h2 style="min-height: auto; margin-bottom: 10px; color: white;">مرحباً بك في تحدي العقول! 🧠</h2>
+                        <p style="color: #b3b3cc; font-size: 15px; line-height: 1.6;">هل أنت مستعد لاختبار معلوماتك في أسئلة ثقافية وعلمية صعبة؟ لديك 10 ثوانٍ فقط لكل سؤال!</p>
+                        <button id="startBtn" onclick="initiateGame()">ابدأ اللعب الآن 🚀</button>
+                    </div>
+
+                    <!-- حاوية اللعب الحقيقية -->
+                    <div id="playArea" class="game-play-area">
+                        <h2 id="ques" style="color: white;">السؤال يظهر هنا</h2>
+                        <button onclick="check(0)" id="btn0">اختيار 1</button>
+                        <button onclick="check(1)" id="btn1">اختيار 2</button>
+                        <button onclick="check(2)" id="btn2">اختيار 3</button>
+                        
+                        <p id="res" style="font-weight: bold; font-size: 16px; min-height: 20px;"></p>
+                        <p class="info-text">النقاط: <span id="scr" class="highlight-blue">0</span></p>
+                        <p class="info-text">الوقت المتبقي: <span id="timer" class="highlight-red">10</span> ثوانٍ</p>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -480,6 +501,7 @@
     searchInput.addEventListener('input', function() {
         const searchText = searchInput.value.toLowerCase();
         const filteredGames = games.filter(game => game.toLowerCase().includes(searchText));
+        document.dir = "ltr"; // تغيير توجيه القائمة للإنجليزية لتظهر أسماء الألعاب بشكل صحيح
         displayGames(filteredGames);
     });
     displayGames(games);
@@ -552,11 +574,11 @@
         "ما هو العنصر الكيميائي الأكثر وفرة في القشرة الأرضية؟",
         "من هو الفيلسوف اليوناني الذي كان تلميذاً لأفلاطون ومعلماً للإسكندر الأكبر؟",
         "ما هي الدولة الأفريقية الوحيدة التي لم تستعمر قط في تاريخها؟",
-        "كم عدد الغرف في قلب العقرب؟",
-        "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس؟",
+        "كم عدد الغرف (الأذينات والبطينات) في قلب العقرب؟",
+        "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس？",
         "ما هو الكوكب الأقرب إلى الشمس من حيث الحجم (توأم الأرض)؟",
         "ما هو البحر المغلق الذي لا يملك أي منافذ على المحيطات؟",
-        "من هو العالم الذي اكتشف الدورة الدموية الكبرى？",
+        "من هو العالم الذي اكتشف الدورة الدموية الكبرى؟",
         "أين يقع أعمق خندق مائي في العالم (خندق ماريانا)؟"
     ];
 
@@ -580,10 +602,19 @@
     var timeLeft = 10; 
     var timer; 
 
-    var originalCardHTML = document.getElementById('quiz-game-card').innerHTML;
+    var originalPlayAreaHTML = document.getElementById('playArea').innerHTML;
 
-    function startTimer() {
-        timeLeft = 10; 
+    function initiateGame() {
+        document.getElementById('welcomeScreen').style.display = 'none';
+        document.getElementById('playArea').style.display = 'block';
+        show();
+    }
+
+    function startTimer(event) {
+        if (event) {
+            timeLeft = 10; 
+        }
+        
         document.getElementById("timer").innerText = timeLeft;
         clearInterval(timer); 
 
@@ -606,7 +637,7 @@
             document.getElementById("btn2").innerText = choices[index][2];
             document.getElementById("res").innerText = ""; 
             
-            startTimer(); 
+            startTimer(true); 
         } else {
             clearInterval(timer); 
             showFinalResult();
@@ -638,15 +669,15 @@
         var status = (score >= 5) ? "Smart 🧠" : "Stupid 🤡";
         var statusColor = (score >= 5) ? "#00b894" : "#ff7675";
         
-        document.getElementById('quiz-game-card').innerHTML = `
+        document.getElementById('gameCard').innerHTML = `
             <div style="text-align:center; padding:10px;">
                 <h1 style="color:#ffffff; font-size: 22px; margin-top:0; font-weight:700;">انتهت اللعبة! 🏁</h1>
-                <div style="color:${statusColor}; font-size: 42px; font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px ${statusColor}44;">
+                <div style="color:${statusColor}; font-size: 40px; font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px ${statusColor}44;">
                     ${status}
                 </div>
                 <p style="color:#b3b3cc; font-size: 15px; font-weight: 500;">نقاطك النهائية هي: <span style="font-size:20px; color:#00cec9; font-weight:bold;">${score}</span> من ${questions.length}</p>
                 
-                <button onclick="restartGame()" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); color:white; padding: 14px; border-radius:10px; font-weight:bold; margin-top:20px; border:none; width:100%; cursor:pointer; box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);">إعادة اللعب مباشرة 🔄</button>
+                <button onclick="restartGame()" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); color:white; padding: 12px; border-radius:8px; font-weight:bold; margin-top:20px; border:none; width:100%; cursor:pointer; box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);">إعادة اللعب مباشرة 🔄</button>
             </div>
         `;
     }
@@ -654,11 +685,10 @@
     function restartGame() {
         index = 0;
         score = 0;
-        document.getElementById('quiz-game-card').innerHTML = originalCardHTML;
+        document.getElementById('gameCard').innerHTML = `<div id="playArea">${originalPlayAreaHTML}</div>`;
+        document.getElementById('playArea').style.display = 'block';
         show();
     }
-
-    show(); 
 </script>
 
 </body>
