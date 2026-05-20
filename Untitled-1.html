@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التمارين الذكية 🚀 JS Dashboard</title>
+    
+    <!-- 🌟 1. إدخال مكتبة الاحتفالات الخفيفة والذكية من الـ CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
-        /* --- التنسيقات العامة للمظهر واللوحة --- */ 
-        
+        /* --- التنسيقات العامة للمظهر واللوحة --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -161,7 +164,7 @@
         .search-item:hover { background: #3d3d6b; transform: translateX(-5px); }
         .no-results { color: #ee5253; font-style: italic; margin-top: 15px; display: none; }
 
-        /* تمرين 4: لعبة الذاكرة (معدلة ومتوافقة 100% مع الآيفون وسفاري) */
+        /* تمرين 4: لعبة الذاكرة */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(4, minmax(60px, 75px)); 
@@ -170,13 +173,13 @@
             margin-top: 20px; 
         }
         .card { 
-            aspect-ratio: 1; /* يضمن بقاء الكرت مربعاً دائماً */
+            aspect-ratio: 1; 
             background-color: #3d3d6b; 
             border-radius: 8px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 0px; /* تم تعديله إلى 0 لإخفاء الإيموجي تماماً في الآيفون بدلاً من الشفافية */
+            font-size: 0px; 
             font-weight: bold; 
             cursor: pointer; 
             user-select: none; 
@@ -185,31 +188,27 @@
         }
         .card:hover { transform: scale(1.03); background-color: #48487f; }
         
-        /* عند قلب الكرت */
         .card.flipped { 
             background-color: #0abde3; 
-            font-size: 24px; /* يظهر الإيموجي هنا بحجمه الطبيعي */
+            font-size: 24px; 
             color: white; 
             cursor: default; 
         }
         
-        /* عند تطابق الكروت */
         .card.matched { 
             background-color: #10ac84; 
-            font-size: 24px; /* يبقى الإيموجي ظاهراً */
+            font-size: 24px; 
             color: white; 
             cursor: default; 
             animation: pulse 0.3s; 
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
-        /* تصميم كرت المسابقة الفرعي المتناسق */
         .sub-game-content .quiz-container button {
             display: block; width: 100%; padding: 14px; margin: 10px 0; background-color: #1e1e38; border: 1px solid #3d3d6b; color: white; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; text-align: center; font-weight: 500; -webkit-tap-highlight-color: transparent;
         }
         .sub-game-content .quiz-container button:hover { background-color: #3d3d6b; border-color: #0abde3; }
         
-        /* إعدادات أزرار اللعبة الثقافية */
         #gameCard button {
             display: block; width: 100%; padding: 12px; margin: 10px 0; background: linear-gradient(135deg, #6c5ce7, #a29bfe); border: none; color: white; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.2s; text-align: center; font-weight: bold; -webkit-tap-highlight-color: transparent;
         }
@@ -221,22 +220,18 @@
         .highlight-blue { color: #00cec9; font-weight: bold; }
         .highlight-red { color: #ff7675; font-weight: bold; }
 
-        /* ======================================================
-           📱 كود التجاوب للهواتف والشاشات الصغيرة (Responsive Media Query)
-           ====================================================== */
         @media (max-width: 768px) {
             body {
-                flex-direction: column; /* جعل العناصر تحت بعضها */
+                flex-direction: column; 
                 overflow: hidden;
             }
 
-            /* تحويل القائمة الجانبية لقائمة علوية أفقية */
             .sidebar {
                 width: 100%;
                 height: auto;
                 padding: 10px;
                 flex-direction: row;
-                overflow-x: auto; /* تمكين التمرير الأفقي للأزرار */
+                overflow-x: auto; 
                 white-space: nowrap;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.3);
                 gap: 8px;
@@ -244,7 +239,7 @@
             }
 
             .sidebar h1 {
-                display: none; /* إخفاء العنوان الكبير لتوفير مساحة على الهاتف */
+                display: none; 
             }
 
             .tab-btn {
@@ -254,10 +249,9 @@
                 flex-shrink: 0;
             }
 
-            /* تعديل مساحة المحتوى الكلي */
             .content-area {
                 padding: 15px;
-                align-items: flex-start; /* حتى يبدأ المحتوى من الأعلى عند ظهور الكيبورد */
+                align-items: flex-start; 
             }
 
             .app-card {
@@ -269,7 +263,6 @@
                 margin-bottom: 15px;
             }
 
-            /* حجم خط الأيموجي داخل الهواتف الذكية عند فتح الكرت */
             .card.flipped, .card.matched {
                 font-size: 20px;
             }
@@ -287,10 +280,10 @@
         <button class="tab-btn" onclick="switchTab('memory-tab')">🧠 الألعاب الذكية</button>
     </div>
 
-    <!-- منطقة عرض التطبيقات القابلة للتبديل -->
+    <!-- منطقة عرض التطبيقات -->
     <div class="content-area">
 
-        <!-- التمرين الأول: قائمة المهام -->
+        <!-- قائمة المهام -->
         <div id="todo-tab" class="tab-content active">
             <div class="app-card">
                 <h2>قائمـة مهامي 📝</h2>
@@ -302,7 +295,7 @@
             </div>
         </div>
 
-        <!-- التمرين الثاني: محول العملات -->
+        <!-- محول العملات -->
         <div id="converter-tab" class="tab-content">
             <div class="app-card" style="border-color: #ff9f43;">
                 <h2 style="color: #ff9f43;">محول العملات اللحظي 💸</h2>
@@ -321,7 +314,7 @@
             </div>
         </div>
 
-        <!-- التمرين الثالث: محرك البحث اللحظي -->
+        <!-- محرك البحث اللحظي -->
         <div id="search-tab" class="tab-content">
             <div class="app-card" style="border-color: #10ac84;">
                 <h2 style="color: #10ac84;">محرك بحث الألعاب 🎮</h2>
@@ -331,33 +324,29 @@
             </div>
         </div>
 
-        <!-- التمرين الرابع: الألعاب الذكية -->
+        <!-- الألعاب الذكية -->
         <div id="memory-tab" class="tab-content">
-            
-            <!-- لوحة التحكم للتبديل بين اللعبتين بالداخل -->
             <div class="game-switcher-panel">
                 <button class="sub-game-btn active" onclick="changeGame(event, 'memory-game-card')">🧠 لعبة الذاكرة</button>
                 <button class="sub-game-btn" onclick="changeGame(event, 'quiz-game-card')">❓ مسابقة الأسئلة</button>
             </div>
 
-            <!-- اللعبة الأولى: لعبة الذاكرة -->
+            <!-- لعبة الذاكرة -->
             <div id="memory-game-card" class="app-card sub-game-content" style="border-color: #0abde3;">
                 <h2 style="color: #0abde3;">لعبة اختبار الذاكرة 🧠</h2>
                 <p style="color: #b5b5b5; margin: 0;">ابحث عن الأشكال المتشابهة!</p>
                 <div class="grid" id="gameGrid"></div>
             </div>
 
-            <!-- اللعبة الثانية: لعبة الأسئلة الثقافية -->
+            <!-- لعبة الأسئلة الثقافية -->
             <div id="quiz-game-card" class="app-card sub-game-content" style="border-color: #6c5ce7; display: none;">
                 <div id="gameCard">
-                    <!-- شاشة البداية المبدئية -->
                     <div id="welcomeScreen">
                         <h2 style="min-height: auto; margin-bottom: 10px; color: white;">مرحباً بك في تحدي العقول! 🧠</h2>
                         <p style="color: #b3b3cc; font-size: 15px; line-height: 1.6;">هل أنت مستعد لاختبار معلوماتك في أسئلة ثقافية وعلمية صعبة؟ لديك 10 ثوانٍ فقط لكل سؤال!</p>
                         <button id="startBtn" onclick="initiateGame()">ابدأ اللعب الآن 🚀</button>
                     </div>
 
-                    <!-- حاوية اللعب الحقيقية -->
                     <div id="playArea" class="game-play-area">
                         <h2 id="ques" style="color: white;">السؤال يظهر هنا</h2>
                         <button onclick="check(0)" id="btn0">اختيار 1</button>
@@ -370,14 +359,39 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
 <script>
     // ==========================================
-    // أولاً: منطق التنقل بين التبويبات الرئيسية (Tabs Logic)
+    // دالة الاحتفال العامة (Confetti Function) 🌟
+    // ==========================================
+    function triggerCelebration() {
+        var duration = 2.5 * 1000; // مدة الاحتفال ثانيتين ونصف
+        var end = Date.now() + duration;
+
+        (function frame() {
+            confetti({
+                particleCount: 4,
+                angle: 60,
+                spread: 60,
+                origin: { x: 0, y: 0.7 } // انطلاق من اليسار
+            });
+            confetti({
+                particleCount: 4,
+                angle: 120,
+                spread: 60,
+                origin: { x: 1, y: 0.7 } // انطلاق من اليمين
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+    }
+
+    // ==========================================
+    // منطق التنقل بين التبويبات الرئيسية
     // ==========================================
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -387,9 +401,7 @@
         event.currentTarget.classList.add('active');
     }
 
-    // ==========================================
     // منطق التبديل بين الألعاب داخل تبويب الذاكرة
-    // ==========================================
     function changeGame(event, gameCardId) {
         document.querySelectorAll('.sub-game-content').forEach(card => card.style.display = 'none');
         document.querySelectorAll('.sub-game-btn').forEach(btn => btn.classList.remove('active'));
@@ -399,7 +411,7 @@
     }
 
     // ==========================================
-    // كود التمرين الأول: قائمة المهام (Todo List)
+    // كود قائمة المهام (Todo List)
     // ==========================================
     const taskInput = document.getElementById('taskInput');
     const addBtn = document.getElementById('addBtn');
@@ -455,7 +467,7 @@
     }
 
     // ==========================================
-    // كود التمرين الثاني: محول العملات (Converter)
+    // كود محول العملات (Converter)
     // ==========================================
     const amountInput = document.getElementById('amountInput');
     const currencySelect = document.getElementById('currencySelect');
@@ -488,7 +500,7 @@
     convertCurrency();
 
     // ==========================================
-    // كود التمرين الثالث: محرك البحث اللحظي (Search)
+    // كود محرك البحث اللحظي (Search)
     // ==========================================
     const games = [
         "Grand Theft Auto V", "Minecraft", "Counter-Strike 2", "Valorant",
@@ -516,13 +528,13 @@
     searchInput.addEventListener('input', function() {
         const searchText = searchInput.value.toLowerCase();
         const filteredGames = games.filter(game => game.toLowerCase().includes(searchText));
-        document.dir = "ltr"; // تغيير توجيه القائمة للإنجليزية لتظهر أسماء الألعاب بشكل صحيح
+        document.dir = "ltr"; 
         displayGames(filteredGames);
     });
     displayGames(games);
 
     // ==========================================
-    // كود التمرين الرابع: لعبة الذاكرة (Memory Game) - مصلحة ومتوافقة 100% مع iOS
+    // كود لعبة الذاكرة (Memory Game)
     // ==========================================
     const cardValues = [
         "🎯", "🎯", "🤡", "🤡", "👻", "👻", "🌟", "🌟", 
@@ -565,6 +577,13 @@
     function disableCards() {
         firstCard.classList.add('matched');
         secondCard.classList.add('matched');
+        
+        // 🌟 فحص واش اللعبة تسالات كاملة (إدا تطابقوا كاع الكروت الـ 16)
+        const allMatched = document.querySelectorAll('.card.matched').length;
+        if (allMatched === cardValues.length) {
+            setTimeout(triggerCelebration, 500); // طلق الاحتفال! 🎉
+        }
+
         resetTurn();
     }
 
@@ -594,7 +613,7 @@
         "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس؟",
         "ما هو الكوكب الأقرب إلى الشمس من حيث الحجم (توأم الأرض)؟",
         "ما هو البحر المغلق الذي لا يملك أي منافذ على المحيطات؟",
-        "من هو العالم الذي اكتشف الدورة الدموية الكبرى؟",
+        "من هو العالم الذي اكتشف الدورة الدموية الكبرى？",
         "أين يقع أعمق خندق مائي في العالم (خندق ماريانا)؟"
     ];
 
@@ -627,9 +646,7 @@
     }
 
     function startTimer(event) {
-        if (event) {
-            timeLeft = 10; 
-        }
+        if (event) { timeLeft = 10; }
         
         document.getElementById("timer").innerText = timeLeft;
         clearInterval(timer); 
@@ -685,6 +702,11 @@
         var status = (score >= 5) ? "Smart 🧠" : "Stupid 🤡";
         var statusColor = (score >= 5) ? "#00b894" : "#ff7675";
         
+        // 🌟 تفعيل الاحتفال فقط إذا كانت النتيجة ناجحة (اكبر او تساوي 5 نقاط)
+        if (score >= 5) {
+            triggerCelebration();
+        }
+        
         document.getElementById('gameCard').innerHTML = `
             <div style="text-align:center; padding:10px;">
                 <h1 style="color:#ffffff; font-size: 22px; margin-top:0; font-weight:700;">انتهت اللعبة! 🏁</h1>
@@ -701,6 +723,10 @@
     function restartGame() {
         index = 0;
         score = 0;
+        // إعادة خلط كروت لعبة الذاكرة أيضاً عند تصفير الالعاب إذا رغب المستخدم
+        cardValues.sort(() => 0.5 - Math.random());
+        createBoard();
+
         document.getElementById('gameCard').innerHTML = `<div id="playArea">${originalPlayAreaHTML}</div>`;
         document.getElementById('playArea').style.display = 'block';
         show();
