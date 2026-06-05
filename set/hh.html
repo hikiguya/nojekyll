@@ -9,17 +9,16 @@
            1. الألوان الجاهزة والخطوط
            ========================================================================== */
         :root {
-            --primary-color: #c77a58;       /* اللون البرتقالي/البني الدافئ للزر الأساسي */
+            --primary-color: #c77a58;       
             --primary-hover: #b06543;       
-            --nav-text-color: #a4684d;      /* لون بني فاتح دافئ ومريح للكتابة فالهيدر الأبيض */
+            --nav-text-color: #a4684d;      
             
-            /* التدرج الحقيقي مقلوب دابا: كيبدأ داكن من الأسفل/اليسار وكيفتح كيمشي للون المشرق */
             --bg-gradient: linear-gradient(45deg, #3f261b 0%, #875a45 50%, #af7357 100%); 
             
             --text-light: #ffffff;          
             --text-muted: #e5d5cc;          
-            --text-dark: #2d1a12;           /* تم تصحيحه لبني داكن جداً ليكون واضحاً فوق الخلفيات الفاتحة */
-            --text-dark-muted: #61524c;     /* لون وصفي داكن مريح للعين */
+            --text-dark: #2d1a12;           
+            --text-dark-muted: #61524c;     
             
             --font-serif: 'Georgia', 'Times New Roman', serif; 
             --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -110,6 +109,7 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
 
         .nav-cta:hover {
@@ -124,9 +124,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 60px;
-            padding: 80px 8%;
-            min-height: 75vh;
+            gap: 40px;
+            padding: 60px 8%;
+            min-height: calc(100vh - 80px);
             box-sizing: border-box;
         }
 
@@ -141,15 +141,15 @@
 
         .hero-title {
             font-family: var(--font-serif);
-            font-size: 56px;
+            font-size: 54px;
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.2;
             margin: 0 0 20px 0;
             color: var(--text-light); 
         }
 
         .hero-description {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
             color: var(--text-muted);
             max-width: 500px;
@@ -159,6 +159,7 @@
         .hero-buttons {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap; /* باش يلا تضيق الوقت فالموبايل يهبطو الازرار تحت بعضهم بلا مشاكل */
         }
 
         .hero-btn-primary {
@@ -204,12 +205,14 @@
             display: flex;
             justify-content: flex-end;
             animation: fadeInRight 1s ease-out;
+            width: 100%;
         }
 
         .hero-image {
             width: 100%;
-            max-width: 600px;  
-            height: 500px;     
+            max-width: 500px;  
+            height: auto;     
+            aspect-ratio: 1 / 1; /* كتحافظ على شكل مربع متناسق ومتجاوب */
             object-fit: cover; 
             border-radius: 24px; 
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
@@ -230,7 +233,7 @@
             padding: 80px 8%;
             background-color: rgb(249, 237, 219); 
             box-sizing: border-box;
-            scroll-margin-top: 90px; /* كتعطي مساحة صغيرة الفوق باش الهيدر ما يغطيش العنوان ملي نكليكيو على Services */
+            scroll-margin-top: 90px; 
         }
 
         .feature-card {
@@ -239,131 +242,3 @@
             padding: 40px 30px;
             border-radius: 24px;
             text-align: center;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px); 
-            box-shadow: 0 15px 30px rgba(164, 104, 77, 0.15);
-        }
-
-        .feature-card .icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-family: var(--font-serif);
-            font-size: 22px;
-            margin: 0 0 15px 0;
-            color: var(--text-dark); 
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-dark-muted); 
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* ==========================================================================
-           6. الفوتر (Footer)
-           ========================================================================== */
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.4);
-            background-color: rgba(29, 16, 10, 0.4);
-        }
-
-        /* الأنميشن */
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* ==========================================================================
-           7. التجاوب (Responsive)
-           ========================================================================== */
-        @media (max-width: 900px) {
-            .navbar { padding: 15px 5%; }
-            .navbar .nav-links { display: none; } 
-            .hero-section { 
-                flex-direction: column-reverse; 
-                text-align: center; 
-                padding: 50px 5%; 
-                gap: 40px;
-            }
-            .hero-content { align-items: center; }
-            .hero-title { font-size: 38px; }
-            .hero-buttons { justify-content: center; }
-            .hero-image-container { justify-content: center; }
-            
-            .hero-image {
-                width: 280px;
-                height: 280px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <a href="index.html" class="logo">SpaceCréatif <span>Café</span></a>
-        <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="menu.html">Menu</a>
-            <a href="about.html">About Us</a>
-            <a href="#features-section">Services</a> <!-- دابا غيخدم السكرول بشكل صحيح -->
-            <a href="contact.html">Contact</a>
-        </div>
-        <a href="contact.html" class="nav-cta">Book a Table</a>
-    </nav>
-
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Freshly Brewed<br>Happiness,<br>Just for You</h1>
-            <p class="hero-description">Experience the perfect blend of premium beans and cozy atmosphere at SpaceCréatif Café.</p>
-            <div class="hero-buttons">
-                <a href="menu.html" class="hero-btn-primary">Explore Menu</a> <!-- تعديل الرابط لصفحة المنيو -->
-                <a href="menu.html" class="hero-btn-secondary">View Menu</a>
-            </div>
-        </div>
-        <div class="hero-image-container">
-            <img src="cf.jpg" alt="Freshly Brewed Coffee" class="hero-image">
-        </div>
-    </section>
-
-    <!-- تم إضافة id="features-section" هنا لإصلاح الرابط التلقائي -->
-    <section class="features-section" id="features-section">
-        <div class="feature-card">
-            <div class="icon">☕</div>
-            <h3>Premium Quality</h3>
-            <p>We source the finest organic coffee beans from sustainable farms around the world.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🌿</div>
-            <h3>Cozy Atmosphere</h3>
-            <p>The perfect space designed for your creativity, remote work, or casual meetings.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🥐</div>
-            <h3>Fresh Pastries</h3>
-            <p>Delicious, warm pastries baked daily by our expert chefs to match your brew.</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 SpaceCréatif Café. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
