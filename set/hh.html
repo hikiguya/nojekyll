@@ -55,6 +55,12 @@
             color: var(--primary-color);
         }
 
+        /* الروابط فالبيسي */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
         .navbar .nav-links a {
             color: var(--nav-text-color); 
             text-decoration: none;
@@ -98,11 +104,17 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            margin-left: 15px;
         }
 
         .nav-cta:hover {
             background-color: var(--nav-text-color);
             color: white;
+        }
+
+        /* إخفاء زر الهامبرغر فالمتصفح العادي */
+        .menu-btn, #menu-toggle {
+            display: none;
         }
 
         .hero-section {
@@ -277,9 +289,55 @@
             .hero-title { font-size: 44px; }
         }
 
+        /* كود التعديل الخاص بالتلفون */
         @media (max-width: 768px) {
             .navbar { padding: 12px 5%; }
-            .navbar .nav-links { display: none; } 
+            
+            /* إظهار زر الهامبرغر */
+            .menu-btn {
+                display: block;
+                font-size: 24px;
+                color: var(--nav-text-color);
+                cursor: pointer;
+                order: 1;
+            }
+
+            .navbar .logo {
+                order: 2;
+            }
+
+            .nav-cta {
+                order: 3;
+                margin-left: 0;
+                padding: 6px 15px;
+                font-size: 13px;
+            }
+
+            /* تحويل القائمة لمنسدلة بتصميم متناسق */
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+                border-bottom: 2px solid rgba(164, 104, 77, 0.15);
+            }
+
+            .navbar .nav-links a {
+                margin: 10px 0;
+                padding: 5px 25px;
+                display: block;
+            }
+
+            /* كود سحري يفتح المينو فاش كيكليكي على الزر بلا جافاسكريبت */
+            #menu-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
             .hero-section { 
                 flex-direction: column-reverse; 
                 text-align: center; 
@@ -291,6 +349,7 @@
                 align-items: center; 
                 animation: none !important; 
                 opacity: 1 !important; 
+                width: 100%;
             }
             .hero-title { font-size: 34px; line-height: 1.25; }
             .hero-description { font-size: 15px; margin-bottom: 25px; }
@@ -311,8 +370,8 @@
         }
 
         @media (max-width: 400px) {
-            .navbar .logo { font-size: 20px; }
-            .nav-cta { padding: 6px 14px; font-size: 12px; }
+            .navbar .logo { font-size: 18px; }
+            .nav-cta { padding: 6px 10px; font-size: 12px; }
             .hero-title { font-size: 28px; }
         }
     </style>
@@ -320,7 +379,11 @@
 <body>
 
     <nav class="navbar">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-btn">☰</label>
+
         <a href="index.html" class="logo">SpaceCréatif <span>Café</span></a>
+        
         <div class="nav-links">
             <a href="index.html" class="active">Home</a>
             <a href="menu.html">Menu</a>
@@ -328,6 +391,7 @@
             <a href="#features-section">Services</a> 
             <a href="contact.html">Contact</a>
         </div>
+        
         <a href="contact.html" class="nav-cta">Book a Table</a>
     </nav>
 
