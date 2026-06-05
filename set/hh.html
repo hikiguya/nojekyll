@@ -55,12 +55,6 @@
             color: var(--primary-color);
         }
 
-        /* الروابط فالبيسي */
-        .nav-container {
-            display: flex;
-            align-items: center;
-        }
-
         .navbar .nav-links a {
             color: var(--nav-text-color); 
             text-decoration: none;
@@ -104,7 +98,6 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            margin-left: 15px;
         }
 
         .nav-cta:hover {
@@ -112,8 +105,8 @@
             color: white;
         }
 
-        /* إخفاء زر الهامبرغر فالمتصفح العادي */
-        .menu-btn, #menu-toggle {
+        /* إخفاء أزرار التحكم في الهامبرغر على الشاشات الكبيرة */
+        #menu-toggle, .menu-btn {
             display: none;
         }
 
@@ -133,7 +126,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            animation: fadeInLeft 1s ease-out;
         }
 
         .hero-title {
@@ -201,7 +193,6 @@
             flex: 1;
             display: flex;
             justify-content: flex-end;
-            animation: fadeInRight 1s ease-out;
             width: 100%;
         }
 
@@ -273,47 +264,41 @@
             background-color: rgba(29, 16, 10, 0.4);
         }
 
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
         @media (max-width: 1024px) {
             .navbar { padding: 15px 5%; }
             .hero-section { padding: 50px 5%; gap: 30px; }
             .hero-title { font-size: 44px; }
         }
 
-        /* كود التعديل الخاص بالتلفون */
+        /* تعديلات شاشات التلفون */
         @media (max-width: 768px) {
-            .navbar { padding: 12px 5%; }
+            .navbar { 
+                padding: 12px 5%; 
+                position: relative;
+            }
             
-            /* إظهار زر الهامبرغر */
+            /* إظهار أيقونة الهامبرغر وترتيبها ليسار الشاشة */
             .menu-btn {
                 display: block;
-                font-size: 24px;
+                font-size: 28px;
                 color: var(--nav-text-color);
                 cursor: pointer;
                 order: 1;
+                user-select: none;
             }
 
             .navbar .logo {
                 order: 2;
+                font-size: 22px;
             }
 
             .nav-cta {
                 order: 3;
-                margin-left: 0;
-                padding: 6px 15px;
+                padding: 6px 14px;
                 font-size: 13px;
             }
 
-            /* تحويل القائمة لمنسدلة بتصميم متناسق */
+            /* تصميم القائمة المنسدلة المخفية */
             .navbar .nav-links {
                 display: none;
                 flex-direction: column;
@@ -322,20 +307,26 @@
                 left: 0;
                 width: 100%;
                 background-color: #ffffff;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
                 padding: 15px 0;
-                border-bottom: 2px solid rgba(164, 104, 77, 0.15);
+                border-top: 1px solid rgba(164, 104, 77, 0.1);
+                z-index: 999;
             }
 
             .navbar .nav-links a {
-                margin: 10px 0;
-                padding: 5px 25px;
+                margin: 0;
+                padding: 12px 25px;
                 display: block;
+                border-bottom: 1px solid rgba(164, 104, 77, 0.05);
+            }
+            
+            .navbar .nav-links a:last-child {
+                border-bottom: none;
             }
 
-            /* كود سحري يفتح المينو فاش كيكليكي على الزر بلا جافاسكريبت */
+            /* السحر البنيوي لفتح القائمة عند الضغط على الزر */
             #menu-toggle:checked ~ .nav-links {
-                display: flex;
+                display: flex !important;
             }
 
             .hero-section { 
@@ -347,8 +338,6 @@
             }
             .hero-content { 
                 align-items: center; 
-                animation: none !important; 
-                opacity: 1 !important; 
                 width: 100%;
             }
             .hero-title { font-size: 34px; line-height: 1.25; }
@@ -362,8 +351,6 @@
             }
             .hero-image-container { 
                 justify-content: center; 
-                animation: none !important; 
-                opacity: 1 !important; 
             }
             .hero-image { width: 85%; max-width: 320px; height: auto; }
             .features-section { padding: 50px 5%; gap: 20px; }
