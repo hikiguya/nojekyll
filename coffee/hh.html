@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceCréatif Café - Premium Experience</title>
+    <style>
+        :root {
+            --primary-color: #c77a58;       
+            --primary-hover: #b06543;       
+            --nav-text-color: #a4684d;      
+            --bg-gradient: linear-gradient(45deg, #3f261b 0%, #875a45 50%, #af7357 100%); 
+            --text-light: #ffffff;          
+            --text-muted: #e5d5cc;          
+            --text-dark: #2d1a12;           
+            --text-dark-muted: #61524c;     
+            --font-serif: 'Georgia', 'Times New Roman', serif; 
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background-color: #ffffff; 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(164, 104, 77, 0.15); 
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12); 
+        }
+
+        .navbar .logo {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--nav-text-color); 
+            text-decoration: none;
+        }
+
+        .navbar .logo span {
+            color: var(--primary-color);
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a {
+            color: var(--nav-text-color); 
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar .nav-links a:hover, 
+        .navbar .nav-links a.active {
+            color: var(--primary-color); 
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background-color: transparent;
+            color: var(--nav-text-color);
+            border: 2px solid var(--nav-text-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .nav-cta:hover {
+            background-color: var(--nav-text-color);
+            color: white;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 28px;
+            color: var(--nav-text-color);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 60px 8%;
+            min-height: calc(100vh - 80px);
+            box-sizing: border-box;
+        }
+
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 54px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            color: var(--text-light); 
+        }
+
+        .hero-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 0 35px 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap; 
+        }
+
+        .hero-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-btn-secondary:hover {
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;  
+            height: auto;     
+            aspect-ratio: 1 / 1; 
+            object-fit: cover; 
+            border-radius: 24px; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02) rotate(-1deg);
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 80px 8%;
+            background-color: rgb(249, 237, 219); 
+            box-sizing: border-box;
+            scroll-margin-top: 90px; 
+        }
+
+        .feature-card {
+            background-color: rgb(255, 255, 255); 
+            border: 1px solid rgb(243, 226, 202);
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 30px rgba(164, 104, 77, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            margin: 0 0 15px 0;
+            color: var(--text-dark); 
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-dark-muted); 
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- STORIES SECTION --- */
+        .stories-section {
+            color: #2d1a12;
+            padding: 80px 8%;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .stories-section h2 {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            margin-bottom: 40px;
+        }
+
+        .stories-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stories-gallery img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .stories-gallery img:hover {
+            transform: translateY(-5px);
+        }
+
+        .stories-text {
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            color: var(--text-dark-muted);
+        }
+
+        .stories-section .hero-btn-secondary {
+            background-color: #f8f6f5;
+            color: #3f261b;
+            border: 2px solid #3f261b;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stories-section .hero-btn-secondary:hover {
+            background-color: #3f261b;
+            color: white;
+        }
+
+        .stories-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- MENU PREVIEW SECTION --- */
+        .menu-preview-section {
+            padding: 80px 8%;
+            background-color: rgb(249, 237, 219);
+            text-align: center;
+            color: var(--text-dark);
+            scroll-margin-top: 80px;
+        }
+
+        .menu-preview-section h2 {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .menu-sub-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .menu-item-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(164, 104, 77, 0.12);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item-info {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-header h3 {
+            margin: 0;
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        .menu-item-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .menu-item-info p {
+            margin: 0 0 20px 0;
+            font-size: 14px;
+            color: var(--text-dark-muted);
+            line-height: 1.5;
+        }
+
+        .order-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .order-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonials-section {
+            padding: 80px 8%;
+            background-color: #ffffff;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .testimonials-section h2 {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            margin-bottom: 40px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: #fdfaf7;
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgb(243, 226, 202);
+            position: relative;
+            text-align: left;
+        }
+
+        .quote-icon {
+            font-size: 40px;
+            color: rgba(199, 122, 88, 0.2);
+            position: absolute;
+            top: 20px;
+            left: 25px;
+        }
+
+        .stars {
+            color: #ffb703;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .testimonial-card p {
+            font-size: 15px;
+            color: var(--text-dark-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .client-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .client-name h4 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .client-name span {
+            font-size: 12px;
+            color: var(--primary-color);
+        }
+
+        /* --- MAP SECTION --- */
+        .map-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 0 0 60px 0;
+        }
+
+        .map-container {
+            width: 70%;
+            margin: 0 auto;
+            max-width: 1200px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            line-height: 0; 
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: 2px solid rgba(199, 122, 88, 0.2);
+            box-sizing: border-box;
+        }
+
+        /* --- RESERVATION SECTION --- */
+        .reservation-section {
+            padding: 90px 8%;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            scroll-margin-top: 80px;
+        }
+
+        .reservation-container {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .reservation-container h2 {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .reservation-container p {
+            color: var(--text-dark-muted);
+            margin-bottom: 35px;
+            font-size: 15px;
+        }
+
+        .reservation-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input, 
+        .form-group select {
+            padding: 12px 15px;
+            border: 1px solid rgba(164, 104, 77, 0.25);
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #fdfaf7;
+            color: var(--text-dark);
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .reserve-submit-btn {
+            grid-column: span 2;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .reserve-submit-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(29, 16, 10, 0.4);
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 1024px) {
+            .navbar { padding: 15px 5%; }
+            .hero-section { padding: 50px 5%; gap: 30px; }
+            .hero-title { font-size: 44px; }
+            .stories-section h2, .menu-preview-section h2, .testimonials-section h2 { font-size: 34px; }
+            .map-container { width: 90%; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { 
+                padding: 12px 5%; 
+                position: relative;
+            }
+            
+            .menu-btn {
+                display: block;
+                order: 1;
+            }
+
+            .navbar .logo {
+                order: 2;
+                font-size: 22px;
+            }
+
+            .nav-cta {
+                order: 3;
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                padding: 15px 0;
+                border-top: 1px solid rgba(164, 104, 77, 0.1);
+                z-index: 999;
+            }
+
+            .navbar .nav-links.show-menu {
+                display: flex;
+            }
+
+            .navbar .nav-links a {
+                margin: 0;
+                padding: 12px 25px;
+                display: block;
+                border-bottom: 1px solid rgba(164, 104, 77, 0.05);
+            }
+            
+            .navbar .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .hero-section { 
+                flex-direction: column-reverse; 
+                text-align: center; 
+                padding: 40px 5% 60px 5%; 
+                gap: 35px;
+                min-height: auto;
+            }
+            .hero-content { 
+                align-items: center; 
+                width: 100%;
+            }
+            .hero-title { font-size: 34px; line-height: 1.25; }
+            .hero-description { font-size: 15px; margin-bottom: 25px; }
+            .hero-buttons { justify-content: center; width: 100%; }
+            .hero-btn-primary, .hero-btn-secondary {
+                width: 100%; 
+                max-width: 260px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            .hero-image-container { 
+                justify-content: center; 
+            }
+            .hero-image { width: 85%; max-width: 320px; height: auto; }
+            
+            .features-section, .stories-section, .menu-preview-section, .testimonials-section { 
+                padding: 50px 5%; 
+            }
+            
+            .stories-buttons .hero-btn-primary, 
+            .stories-buttons .hero-btn-secondary { width: 100%; max-width: 260px; }
+
+            .map-container { width: 90%; }
+            .map-container iframe { height: 320px; }
+
+            .reservation-section { padding: 40px 5%; }
+            .reservation-container { padding: 30px 20px; }
+            .reservation-form { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .reserve-submit-btn { grid-column: span 1; }
+        }
+
+        @media (max-width: 400px) {
+            .navbar .logo { font-size: 18px; }
+            .nav-cta { padding: 6px 10px; font-size: 12px; }
+            .hero-title { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="menu-btn" id="hamburger-btn">☰</div>
+
+        <a href="index.html" class="logo">SpaceCréatif <span>Café</span></a>
+        
+        <div class="nav-links" id="nav-menu">
+            <a href="index.html" class="active">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About Us</a>
+            <a href="#features-section">Services</a> 
+            <a href="#reservation">Reservation</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        
+        <a href="#reservation" class="nav-cta">Book a Table</a>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Freshly Brewed<br>Happiness,<br>Just for You</h1>
+            <p class="hero-description">Experience the perfect blend of premium beans and cozy atmosphere at SpaceCréatif Café.</p>
+            <div class="hero-buttons">
+                <a href="#menu-preview" class="hero-btn-primary">Explore Menu</a> 
+                <a href="menu.html" class="hero-btn-secondary">View Full Menu</a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="cf.jpg" alt="Freshly Brewed Coffee" class="hero-image">
+        </div>
+    </section>
+
+    <section class="features-section" id="features-section">
+        <div class="feature-card">
+            <div class="icon">☕</div>
+            <h3>Premium Quality</h3>
+            <p>We source the finest organic coffee beans from sustainable farms around the world.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌿</div>
+            <h3>Cozy Atmosphere</h3>
+            <p>The perfect space designed for your creativity, remote work, or casual meetings.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🥐</div>
+            <h3>Fresh Pastries</h3>
+            <p>Delicious, warm pastries baked daily by our expert chefs to match your brew.</p>
+        </div>
+    </section>
+
+    <section class="stories-section">
+        <h2>Chronicles Stories From<br>The Best Coffee Shops</h2>
+        <div class="stories-gallery">
+            <img src="btt.jpg" alt="Coffee Brewing Process">
+            <img src="learn.jpg" alt="Our Cozy Space">
+            <img src="it.jpg" alt="Roasting Coffee Beans">
+        </div>
+        <p class="stories-text">We source our beans directly from small-batch farmers across Ethiopia, Colombia, and Guatemala, ensuring fair trade practices and exceptional quality. Our master roaster brings decades of experience to every batch, creating distinctive flavor profiles you won't find anywhere else.</p>
+        <div class="stories-buttons">
+            <a href="menu.html" class="hero-btn-primary">Explore Product</a>
+            <a href="about.html" class="hero-btn-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <section class="menu-preview-section" id="menu-preview">
+        <h2>Our Signature Brews</h2>
+        <p class="menu-sub-title">Customer Favorites Across the Season</p>
+        <div class="menu-grid">
+            <div class="menu-item-card">
+                <img src="car.jpg" alt="Caramel Latte" class="menu-item-image">
+                <div class="menu-item-info">
+                    <div class="menu-item-header">
+                        <h3>Caramel Latte</h3>
+                        <span class="menu-item-price">35 DH</span>
+                    </div>
+                    <p>Espresso blended with steamed milk and a rich swirl of sweet caramel sauce.</p>
+                    <button class="order-btn">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item-card">
+                <img src="sh.jpg" alt="V60 Pour Over" class="menu-item-image">
+                <div class="menu-item-info">
+                    <div class="menu-item-header">
+                        <h3>V60 Pour Over</h3>
+                        <span class="menu-item-price">40 DH</span>
+                    </div>
+                    <p>Pure single-origin Ethiopian beans carefully hand-poured for ultimate clarity.</p>
+                    <button class="order-btn">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item-card">
+                <img src="cr.jpg" alt="Almond Croissant" class="menu-item-image">
+                <div class="menu-item-info">
+                    <div class="menu-item-header">
+                        <h3>Almond Croissant</h3>
+                        <span class="menu-item-price">25 DH</span>
+                    </div>
+                    <p>Flaky pastry filled with rich almond cream and baked to crisp perfection.</p>
+                    <button class="order-btn">Order Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <h2>What Our Creative Community Says</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <span class="quote-icon">“</span>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>The best place in town to work remotely. The Wi-Fi is fast, the coffee inspires creativity, and the staff treats you like family.</p>
+                <div class="client-profile">
+                    <img src="user1.jpg" alt="Amine" class="client-avatar">
+                    <div class="client-name">
+                        <h4>Amine Bennani</h4>
+                        <span>Freelance Developer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <span class="quote-icon">“</span>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>Their V60 Pour Over is absolutely exquisite. You can tell they take roasting seriously. Truly a premium experience.</p>
+                <div class="client-profile">
+                    <img src="user2.jpg" alt="Sara" class="client-avatar">
+                    <div class="client-name">
+                        <h4>Sara Mansouri</h4>
+                        <span>UI/UX Designer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.4429997184284!2d-5.002446724653805!3d34.03251781812838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd9f8b486ba21eb7%3A0x6002bb5e89bf65d8!2sFes!5e0!3m2!1sen!2sma!4v1717711200000!5m2!1sen!2sma" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+        </div>
+    </section>
+
+    <section class="reservation-section" id="reservation">
+        <div class="reservation-container">
+            <h2>Book Your Space</h2>
+            <p>Secure a quiet table for your next meeting, deep-work session, or creative breakout.</p>
+            <form class="reservation-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="fullname" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-address">Email Address</label>
+                    <input type="email" id="email-address" name="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-date">Select Date</label>
+                    <input type="date" id="res-date" name="res_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-time">Select Time</label>
+                    <select id="res-time" name="res_time" required>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="19:00">07:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label for="guests">Number of Guests</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1 Person (Solo Work)</option>
+                        <option value="2">2 People (Casual Meeting)</option>
+                        <option value="4">4 People (Team Session)</option>
+                        <option value="6">6+ People (Workshop)</option>
+                    </select>
+                </div>
+                <button type="submit" class="reserve-submit-btn">Confirm Reservation</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 SpaceCréatif Café. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.navbar .nav-links a');
+            const bookingForm = document.getElementById('bookingForm');
+
+            // 1. Mobile Menu Toggler
+            hamburgerBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('show-menu');
+                hamburgerBtn.textContent = navMenu.classList.contains('show-menu') ? '✕' : '☰';
+            });
+
+            // 2. Automatically Close Mobile Menu when link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(navMenu.classList.contains('show-menu')) {
+                        navMenu.classList.remove('show-menu');
+                        hamburgerBtn.textContent = '☰';
+                    }
+                });
+            });
+
+            // 3. Prevent Form Reload and Mock Confirmation
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const clientName = document.getElementById('full-name').value;
+                const bookDate = document.getElementById('res-date').value;
+                const bookTime = document.getElementById('res-time').value;
+
+                alert(`Thank you, ${clientName}! Your table has been requested for ${bookDate} at ${bookTime}. We look forward to seeing you!`);
+                bookingForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
